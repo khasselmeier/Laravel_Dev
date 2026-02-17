@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\JobPosted;
+use App\Models\Job;
 use App\Models\QuitJob;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class QuitJobController extends Controller
 {
@@ -30,6 +33,26 @@ class QuitJobController extends Controller
         return view('quitjobs.show', [
             'quitJob' => $quitjob, // keep the view variable name as quitJob
         ]);
+    }
+
+    public function store()
+    {
+        request()->validate([
+            'title' => ['required', 'min:3'],
+            'salary' => ['required'],
+            'description' => ['required'],
+            'job_description' => ['required'],
+        ]);
+
+        $quitjob = QuitJob::create([
+            'title' => request('title'),
+            'salary' => request('salary'),
+            'description' => request('description'),
+            'job_description' => request('job_description'),
+            'user_id' => auth()->id(),
+        ]);
+
+        return redirect('/quitjobs');
     }
 
     public function edit(QuitJob $quitjob)
