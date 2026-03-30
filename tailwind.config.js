@@ -5,13 +5,13 @@ export default {
         "./resources/**/*.js",
         "./resources/**/*.vue",
     ],
-    theme: {
-        extend: {
-            colors: {
-                "laracasts": "rgb(50,138,241)"
-            }
-        },
+  theme: {
+    extend: {
+        colors: {
+            "laraCasts": "rgb(50,138,241)"
+        }
     },
-    plugins: [],
+  },
+  plugins: [],
 }
 
